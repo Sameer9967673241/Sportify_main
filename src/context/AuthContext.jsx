@@ -30,12 +30,12 @@ export const AuthProvider = ({ children }) => {
     let mockUser = null;
     let mockToken = null;
 
-    if (email === 'admin@sports.com' && password === 'admin123') {
-      mockUser = { id: 1, name: 'Admin User', email: 'admin@sports.com', role: 'admin' };
+    if (email === 'admin@sportify.com' && password === 'admin123') {
+      mockUser = { id: 1, name: 'Admin User', email: 'admin@sportify.com', role: 'admin' };
       mockToken = 'mock_jwt_token_admin_12345';
     } 
-    else if (email === 'student@sports.com' && password === 'student123') {
-      mockUser = { id: 2, name: 'Student Demo', email: 'student@sports.com', role: 'student' };
+    else if (email === 'student@sportify.com' && password === 'student123') {
+      mockUser = { id: 2, name: 'Student Demo', email: 'student@sportify.com', role: 'student' };
       mockToken = 'mock_jwt_token_student_12345';
     }
 

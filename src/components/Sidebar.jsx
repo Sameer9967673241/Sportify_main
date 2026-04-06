@@ -20,7 +20,7 @@ const Sidebar = () => {
   return (
     <aside className="w-64 bg-[var(--color-bg-card)] border-r border-gray-200 hidden md:flex flex-col">
       <div className="h-16 flex items-center px-6 border-b border-gray-200">
-        <h1 className="text-xl font-bold text-gray-900 tracking-tight">Sports<span className="text-blue-600">Academy</span></h1>
+        <h1 className="text-xl font-bold text-gray-900 tracking-tight">Sport<span className="text-blue-600">ify</span></h1>
       </div>
       <nav className="flex-1 overflow-y-auto py-4">
         <ul className="space-y-1 px-4">

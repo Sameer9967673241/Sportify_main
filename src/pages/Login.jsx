@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { LogIn } from 'lucide-react';
 
 const Login = () => {
-  const [email, setEmail] = useState('admin@sports.com');
+  const [email, setEmail] = useState('admin@sportify.com');
   const [password, setPassword] = useState('admin123');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { login } = useAuth();
@@ -16,12 +16,12 @@ const Login = () => {
   };
 
   const fillAdmin = () => {
-    setEmail('admin@sports.com');
+    setEmail('admin@sportify.com');
     setPassword('admin123');
   };
 
   const fillStudent = () => {
-    setEmail('student@sports.com');
+    setEmail('student@sportify.com');
     setPassword('student123');
   };
 
@@ -63,7 +63,7 @@ const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="input-field"
-                  placeholder="admin@sports.com"
+                  placeholder="admin@sportify.com"
                 />
               </div>
             </div>
