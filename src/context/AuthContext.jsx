@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
       setUser(mockUser);
       toast.success('Successfully logged in!');
       
-      const redirectPath = mockUser.role === 'admin' ? '/dashboard' : '/my-dashboard';
+      const redirectPath = mockUser.role === 'admin' ? '/students' : '/student/me';
       navigate(redirectPath);
       return true;
     }

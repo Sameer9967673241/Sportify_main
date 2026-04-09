@@ -1,107 +1,106 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
-import api from '../services/api';
-import { Check, X } from 'lucide-react';
+import { Calendar as CalendarIcon, ListTodo, AlertTriangle } from 'lucide-react';
+import AttendanceCalendar from '../components/AttendanceCalendar';
 
 const mockStudents = [
-  { id: 1, name: 'John Doe', status: null },
-  { id: 2, name: 'Michael Smith', status: 'Present' },
-  { id: 3, name: 'Sarah Lee', status: 'Absent' },
+  { id: 1, name: 'Aarav Sharma', batch: 'Morning (U-15)' },
+  { id: 2, name: 'Priya Patel', batch: 'Evening (U-13)' },
+  { id: 3, name: 'Rohan Gupta', batch: 'Morning (U-17)' },
+  { id: 4, name: 'Kavita Singh', batch: 'Weekend (U-11)' }
 ];
 
 const Attendance = () => {
-  const [students, setStudents] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [view, setView] = useState('today'); // 'today' or 'calendar'
+  const [attendance, setAttendance] = useState({});
+
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
-  useEffect(() => {
-    const fetchAttendance = async () => {
-      try {
-        const res = await api.get('/attendance/today');
-        setStudents(res.data);
-      } catch (error) {
-        setStudents(mockStudents);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchAttendance();
-  }, []);
+  const handleMark = (id, status) => {
+    setAttendance(prev => ({ ...prev, [id]: status }));
+  };
 
-  const markAttendance = async (studentId, status) => {
-    try {
-      // await api.post(`/attendance`, { studentId, status });
-      setStudents(students.map(s => s.id === studentId ? { ...s, status } : s));
-      toast.success(`Marked as ${status}`);
-    } catch (error) {
-      toast.error('Failed to mark attendance');
-    }
+  const handleSave = () => {
+    toast.success('Attendance saved for today!');
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Today's Attendance</h1>
-        <p className="text-gray-500 text-sm mt-1">{today}</p>
+    <div className="pb-24">
+      {/* View Toggle */}
+      <div className="flex bg-gray-100 p-1 rounded-xl mb-4 max-w-sm mx-auto">
+        <button
+          onClick={() => setView('today')}
+          className={`flex-1 py-2 text-sm font-semibold rounded-lg flex justify-center items-center gap-2 transition-all ${
+            view === 'today' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500'
+          }`}
+        >
+          <ListTodo size={18} /> Today
+        </button>
+        <button
+          onClick={() => setView('calendar')}
+          className={`flex-1 py-2 text-sm font-semibold rounded-lg flex justify-center items-center gap-2 transition-all ${
+            view === 'calendar' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500'
+          }`}
+        >
+          <CalendarIcon size={18} /> Calendar
+        </button>
       </div>
 
-      <div className="card overflow-hidden !p-0 max-w-4xl">
-        <table className="w-full text-left text-sm whitespace-nowrap">
-          <thead className="bg-gray-50/50 text-gray-500 uppercase">
-            <tr>
-              <th className="px-6 py-4 font-medium">Student Name</th>
-              <th className="px-6 py-4 font-medium">Status</th>
-              <th className="px-6 py-4 font-medium text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100">
-            {isLoading ? (
-              <tr><td colSpan="3" className="px-6 py-8 text-center">Loading...</td></tr>
-            ) : (
-              students.map((student) => (
-                <tr key={student.id} className="hover:bg-gray-50/50 transition-colors">
-                  <td className="px-6 py-4 font-medium text-gray-900">{student.name}</td>
-                  <td className="px-6 py-4">
-                    {student.status ? (
-                      <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${
-                        student.status === 'Present' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                      }`}>
-                        {student.status}
-                      </span>
-                    ) : (
-                      <span className="text-gray-400 italic">Not marked</span>
-                    )}
-                  </td>
-                  <td className="px-6 py-4 text-right flex justify-end gap-2">
+      {view === 'calendar' ? (
+        <AttendanceCalendar />
+      ) : (
+        <>
+          <div className="mb-4 bg-blue-50 text-blue-800 p-3 rounded-xl text-center font-semibold shadow-sm border border-blue-100">
+            {today}
+          </div>
+
+          <div className="space-y-3 mb-6">
+            {mockStudents.map((student) => {
+              const status = attendance[student.id];
+              return (
+                <div key={student.id} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex items-center justify-between">
+                  <div>
+                    <h3 className="font-semibold text-gray-800">{student.name}</h3>
+                    <div className="text-xs text-gray-500 mt-0.5">{student.batch}</div>
+                  </div>
+                  
+                  <div className="flex bg-gray-100 p-1 rounded-lg">
                     <button
-                      onClick={() => markAttendance(student.id, 'Present')}
-                      className={`p-2 rounded-lg border transition-colors ${
-                        student.status === 'Present' 
-                          ? 'bg-green-50 border-green-200 text-green-600' 
-                          : 'border-gray-200 text-gray-500 hover:bg-green-50 hover:text-green-600 hover:border-green-200'
+                      onClick={() => handleMark(student.id, 'present')}
+                      className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${
+                        status === 'present' 
+                          ? 'bg-green-500 text-white shadow-sm' 
+                          : 'text-gray-500 hover:text-green-600 hover:bg-white relative z-10'
                       }`}
-                      title="Mark Present"
                     >
-                      <Check className="w-4 h-4" />
+                      P
                     </button>
                     <button
-                      onClick={() => markAttendance(student.id, 'Absent')}
-                      className={`p-2 rounded-lg border transition-colors ${
-                        student.status === 'Absent' 
-                          ? 'bg-red-50 border-red-200 text-red-600' 
-                          : 'border-gray-200 text-gray-500 hover:bg-red-50 hover:text-red-600 hover:border-red-200'
+                      onClick={() => handleMark(student.id, 'absent')}
+                      className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${
+                        status === 'absent' 
+                          ? 'bg-red-500 text-white shadow-sm' 
+                          : 'text-gray-500 hover:text-red-600 hover:bg-white relative z-10'
                       }`}
-                      title="Mark Absent"
                     >
-                      <X className="w-4 h-4" />
+                      A
                     </button>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="fixed bottom-20 left-4 right-4 max-w-3xl mx-auto z-10 transition-transform">
+            <button 
+              onClick={handleSave}
+              className="w-full bg-blue-600 text-white font-semibold py-4 rounded-2xl shadow-lg shadow-blue-200 active:scale-[0.98] transition-transform"
+            >
+              Save Attendance
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
