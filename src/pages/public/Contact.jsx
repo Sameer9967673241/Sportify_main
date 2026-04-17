@@ -1,11 +1,43 @@
+import { useState } from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const Contact = () => {
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    toast.success('Message sent! We will get back to you shortly.');
-    e.target.reset();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        toast.success('Message sent! We will get back to you shortly.');
+        setFormData({ firstName: '', lastName: '', email: '', message: '' });
+      } else {
+        toast.error('Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Submission Error:', error);
+      toast.error('Something went wrong. Is the server running?');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -86,32 +118,62 @@ const Contact = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div>
                   <label className="block text-sm font-black text-white/40 uppercase tracking-widest mb-3">First Name</label>
-                  <input type="text" required className="input-field" placeholder="John" />
+                  <input 
+                    type="text" 
+                    name="firstName"
+                    required 
+                    className="input-field" 
+                    placeholder="John" 
+                    value={formData.firstName}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-black text-white/40 uppercase tracking-widest mb-3">Last Name</label>
-                  <input type="text" required className="input-field" placeholder="Doe" />
+                  <input 
+                    type="text" 
+                    name="lastName"
+                    required 
+                    className="input-field" 
+                    placeholder="Doe" 
+                    value={formData.lastName}
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-black text-white/40 uppercase tracking-widest mb-3">Email Address</label>
-                <input type="email" required className="input-field" placeholder="john@athlete.com" />
+                <input 
+                  type="email" 
+                  name="email"
+                  required 
+                  className="input-field" 
+                  placeholder="john@athlete.com" 
+                  value={formData.email}
+                  onChange={handleChange}
+                />
               </div>
-
 
               <div>
                 <label className="block text-sm font-black text-white/40 uppercase tracking-widest mb-3">Your Message</label>
                 <textarea
+                  name="message"
                   rows="4"
                   required
                   className="input-field resize-none"
                   placeholder="How can we help your journey?"
+                  value={formData.message}
+                  onChange={handleChange}
                 ></textarea>
               </div>
 
-              <button type="submit" className="btn-primary w-full py-5 text-xl tracking-wide uppercase font-black">
-                Send Transmission
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="btn-primary w-full py-5 text-xl tracking-wide uppercase font-black disabled:opacity-50"
+              >
+                {isSubmitting ? 'Sending...' : 'Send Transmission'}
               </button>
             </form>
           </div>

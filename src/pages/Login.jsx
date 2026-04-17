@@ -12,8 +12,29 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await login(email, password, name);
-    setIsSubmitting(false);
+    
+    try {
+      // 1. Send registration data to backend for email notification
+      const emailResponse = await fetch('http://localhost:5000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      if (!emailResponse.ok) {
+        console.warn('Backend email notification failed, but proceeding with login...');
+      }
+
+      // 2. Proceed with the actual account creation/login logic
+      await login(email, password, name);
+    } catch (error) {
+      console.error('Registration/Email Error:', error);
+      // We still attempt to login if it's just the email that failed, 
+      // but if the network is down completely, it will throw here.
+      await login(email, password, name);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
