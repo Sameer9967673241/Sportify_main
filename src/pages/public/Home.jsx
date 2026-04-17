@@ -122,7 +122,7 @@ const Home = () => {
             ))}
           </div>
           
-          <Link to="/sports" className="mt-12 flex md:hidden items-center justify-center w-full btn-secondary text-lg py-4">
+          <Link to="/sports" className="mt-12 flex md:hidden items-center justify-center w-full btn-outline-navy text-lg py-4">
             View All Sports
           </Link>
         </div>
@@ -166,7 +166,7 @@ const Home = () => {
           </div>
           
           <div className="mt-12 text-center">
-            <Link to="/sports" className="btn-secondary inline-flex items-center gap-2">
+            <Link to="/sports" className="btn-outline-navy inline-flex items-center gap-2">
               Explore All Venues <ChevronRight size={18} />
             </Link>
           </div>
