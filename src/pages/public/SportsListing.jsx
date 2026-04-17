@@ -14,7 +14,10 @@ const SportsListing = () => {
     let result = venues;
 
     if (searchTerm) {
-      result = result.filter(v => v.name.toLowerCase().includes(searchTerm.toLowerCase()));
+      result = result.filter(v => 
+        v.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        v.sport.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     }
     
     if (selectedSport !== 'All') {
