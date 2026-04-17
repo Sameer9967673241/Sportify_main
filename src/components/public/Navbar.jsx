@@ -56,7 +56,7 @@ const Navbar = () => {
               </Link>
             ))}
             <div className={`flex items-center gap-6 pl-8 border-l transition-colors duration-500 ${isDarkNav ? 'border-white/10' : 'border-navy-900/10'}`}>
-              <Link to="/login" className="btn-primary flex items-center gap-2.5 text-xs font-black uppercase tracking-[0.2em] px-7 py-3 shadow-[0_10px_30px_-10px_rgba(37,99,235,0.5)]">
+              <Link to="/register" className="btn-primary flex items-center gap-2.5 text-xs font-black uppercase tracking-[0.2em] px-7 py-3 shadow-[0_10px_30px_-10px_rgba(37,99,235,0.5)]">
                 <User size={18} className="stroke-[3]" />
                 <span>Register</span>
               </Link>
@@ -93,7 +93,7 @@ const Navbar = () => {
             </Link>
           ))}
           <div className="h-px bg-slate-100/50 my-4"></div>
-          <Link to="/login" onClick={() => setIsOpen(false)} className="btn-primary text-center py-5 font-black uppercase tracking-widest text-sm shadow-xl">
+          <Link to="/register" onClick={() => setIsOpen(false)} className="btn-primary text-center py-5 font-black uppercase tracking-widest text-sm shadow-xl">
             Register Account
           </Link>
         </div>
