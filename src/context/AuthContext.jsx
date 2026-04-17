@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(false);
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (email, password, name = '') => {
     // Basic mock authentication login
     let mockUser = null;
     let mockToken = null;
@@ -38,18 +38,24 @@ export const AuthProvider = ({ children }) => {
       mockUser = { id: 2, name: 'Student Demo', email: 'student@sportify.com', role: 'student' };
       mockToken = 'mock_jwt_token_student_12345';
     }
+    else {
+      // Simulate successful registration for any other email
+      mockUser = { id: Date.now(), name: name || 'New User', email: email, role: 'student' };
+      mockToken = 'mock_jwt_token_new_user_' + Date.now();
+    }
 
     if (mockUser) {
       localStorage.setItem('token', mockToken);
       localStorage.setItem('user', JSON.stringify(mockUser));
       setUser(mockUser);
-      toast.success('Successfully logged in!');
+      toast.success(name ? 'Account created successfully!' : 'Successfully logged in!');
       
       const redirectPath = mockUser.role === 'admin' ? '/students' : '/student/me';
       navigate(redirectPath);
       return true;
     }
     
+    // This part is practically unreachable now, but kept for structure
     toast.error('Invalid email or password');
     return false;
   };
