@@ -28,7 +28,7 @@ const AboutUs = () => {
                 {/* Large Image */}
                 <div className="relative rounded-[2rem] overflow-hidden flex-1 sm:w-[60%] h-80 sm:h-[420px] group shadow-sm">
                   <img 
-                    src="/images/felix-yu-Ii7adwWwNh4-unsplash.jpg" 
+                    src={`${import.meta.env.BASE_URL}images/felix-yu-Ii7adwWwNh4-unsplash.jpg`} 
                     alt="Basketball Court" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
@@ -57,7 +57,7 @@ const AboutUs = () => {
                   {/* Small Image */}
                   <div className="relative rounded-[2rem] overflow-hidden h-48 sm:h-56 group shadow-sm">
                     <img 
-                      src="/images/maria-budanova-pristavskaya-pJR5MpkKTM8-unsplash.jpg" 
+                      src={`${import.meta.env.BASE_URL}images/maria-budanova-pristavskaya-pJR5MpkKTM8-unsplash.jpg`} 
                       alt="Gymnastics Center" 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
@@ -98,7 +98,7 @@ const AboutUs = () => {
               {/* Image half */}
               <div className="w-full sm:w-1/2 h-64 sm:h-full relative overflow-hidden">
                 <img 
-                  src="/images/august-phlieger-CREqtqgBFcU-unsplash.jpg" 
+                  src={`${import.meta.env.BASE_URL}images/august-phlieger-CREqtqgBFcU-unsplash.jpg`} 
                   alt="Basketball Court" 
                   className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
                 />
@@ -136,7 +136,7 @@ const AboutUs = () => {
                 {/* Overlapping small image */}
                 <div className="relative w-44 h-52 sm:w-56 sm:h-64 shrink-0 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white">
                   <img 
-                    src="/images/jesse-orrico-mse1vdzZXjA-unsplash.jpg" 
+                    src={`${import.meta.env.BASE_URL}images/jesse-orrico-mse1vdzZXjA-unsplash.jpg`} 
                     alt="Sports training" 
                     className="w-full h-full object-cover"
                   />

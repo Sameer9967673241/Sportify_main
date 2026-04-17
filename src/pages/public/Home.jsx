@@ -71,27 +71,27 @@ const Home = () => {
 
               {/* Center */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-[220px] hex-clip bg-slate-200 z-30 ring-4 ring-white/10 shadow-2xl">
-                 <img src="/images/felix-yu-Ii7adwWwNh4-unsplash.jpg" alt="Sport center" className="w-full h-full object-cover" />
+                 <img src={`${import.meta.env.BASE_URL}images/felix-yu-Ii7adwWwNh4-unsplash.jpg`} alt="Sport center" className="w-full h-full object-cover" />
               </div>
 
               {/* Top Left */}
               <div className="absolute top-1/2 left-1/2 ml-[-144px] mt-[-165px] -translate-x-1/2 -translate-y-1/2 w-48 h-[220px] hex-clip bg-slate-200 z-20">
-                 <img src="/images/maria-budanova-pristavskaya-pJR5MpkKTM8-unsplash.jpg" alt="Gymnastics" className="w-full h-full object-cover" />
+                 <img src={`${import.meta.env.BASE_URL}images/maria-budanova-pristavskaya-pJR5MpkKTM8-unsplash.jpg`} alt="Gymnastics" className="w-full h-full object-cover" />
               </div>
 
               {/* Top Right */}
               <div className="absolute top-1/2 left-1/2 ml-[144px] mt-[-165px] -translate-x-1/2 -translate-y-1/2 w-48 h-[220px] hex-clip bg-slate-200 z-20">
-                 <img src="/images/august-phlieger-CREqtqgBFcU-unsplash.jpg" alt="Basketball indoor" className="w-full h-full object-cover" />
+                 <img src={`${import.meta.env.BASE_URL}images/august-phlieger-CREqtqgBFcU-unsplash.jpg`} alt="Basketball indoor" className="w-full h-full object-cover" />
               </div>
 
               {/* Bottom Left */}
               <div className="absolute top-1/2 left-1/2 ml-[-144px] mt-[165px] -translate-x-1/2 -translate-y-1/2 w-48 h-[220px] hex-clip bg-slate-200 z-20">
-                 <img src="/images/naveen-ketterer-EIxQkHx4rWk-unsplash.jpg" alt="Swimming" className="w-full h-full object-cover opacity-90" />
+                 <img src={`${import.meta.env.BASE_URL}images/naveen-ketterer-EIxQkHx4rWk-unsplash.jpg`} alt="Swimming" className="w-full h-full object-cover opacity-90" />
               </div>
 
               {/* Bottom Right */}
               <div className="absolute top-1/2 left-1/2 ml-[144px] mt-[165px] -translate-x-1/2 -translate-y-1/2 w-48 h-[220px] hex-clip bg-slate-200 z-20">
-                 <img src="/images/eduardo-cano-photo-co-6aHmLVmw1qk-unsplash.jpg" alt="Football turf" className="w-full h-full object-cover opacity-90" />
+                 <img src={`${import.meta.env.BASE_URL}images/eduardo-cano-photo-co-6aHmLVmw1qk-unsplash.jpg`} alt="Football turf" className="w-full h-full object-cover opacity-90" />
               </div>
               
               {/* Top Center */}
