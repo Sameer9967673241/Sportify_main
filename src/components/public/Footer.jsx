@@ -20,13 +20,6 @@ const Footer = () => {
             <p className="text-white/40 leading-relaxed text-lg">
               Mumbai's premier sports booking platform. Elevate your game with elite venues and seamless scheduling.
             </p>
-            <div className="flex gap-4 pt-4">
-              {['FB', 'X', 'IG', 'IN'].map((social) => (
-                <a key={social} href="#" className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary-600 hover:text-white hover:border-primary-500 hover:shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all duration-300 font-bold text-xs">
-                  {social}
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -46,7 +39,6 @@ const Footer = () => {
             <ul className="space-y-4">
               <li><Link to="/sports" className="hover:text-primary-400 transition-colors">Basketball Courts</Link></li>
               <li><Link to="/sports" className="hover:text-primary-400 transition-colors">Gymnastics Hub</Link></li>
-              <li><Link to="/sports" className="hover:text-primary-400 transition-colors">Football Turfs</Link></li>
             </ul>
           </div>
 
